@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const { AuthenticationError, UserInputError } = require("apollo-server")
+=======
+const { AuthenticationError } = require("apollo-server")
+>>>>>>> f201d2553025f1e72d7811d49b1f7a27817284b3
 const Post = require("../../models/Post");
 const checkAuth = require("../../utils/check-auth")
 module.exports = {
@@ -35,6 +39,7 @@ module.exports = {
       return post
     },
     async deletePost(_, { postId }, context) {
+<<<<<<< HEAD
       const { username } = checkAuth(context)
       try {
         const post = await Post.findById(postId)
@@ -61,6 +66,20 @@ module.exports = {
         await post.save()
         return post
       } else throw new UserInputError('Post not found')
+=======
+      const user = checkAuth(context)
+      try {
+        const post = await Post.findById(postId)
+        if (user.username === post.username) {
+          await post.delete()
+          return 'Post deleted successfully'
+        } else {
+          throw new AuthenticationError(error)
+        }
+      } catch (error) {
+        throw new Error(error)
+      }
+>>>>>>> f201d2553025f1e72d7811d49b1f7a27817284b3
     }
   }
 };
