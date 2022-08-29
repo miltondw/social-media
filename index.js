@@ -3,7 +3,7 @@ const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers/index");
 const mongoose = require("mongoose");
-
+// TODO:Subscription new Post
 const server = new ApolloServer({
   typeDefs,
   resolvers,
