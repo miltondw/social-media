@@ -16,7 +16,18 @@ mutation Register($username:String!,$email:String!,$password:String!,$confirmPas
     }
   }
 `
+const LOGIN = gql`
+mutation Login($username: String!, $password: String!){
+  login(username: $username, password: $password) {
+    token
+    email
+    username
+  }
+}
+
+`
 
 export {
-  REGISTER
+  REGISTER,
+  LOGIN
 }
