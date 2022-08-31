@@ -24,7 +24,6 @@ root.render(
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-
         </Routes>
       </Router>
     </ApolloProvider>

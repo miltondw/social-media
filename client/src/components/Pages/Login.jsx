@@ -1,7 +1,10 @@
-import React from 'react'
+import * as React from 'react';
+import { Container } from '@mui/material';
 
 export default function Login() {
     return (
-        <div>Login</div>
-    )
+        <Container>
+            Login
+        </Container>
+    );
 }

@@ -13,12 +13,12 @@ export default function CardPosts({ posts }) {
     const urlAvatar = "https://www.kindpng.com/picc/m/421-4212623_gd-avatar-alien-circle-hd-png-download.png"
     return (
         <Grid container justifyContent="space-around"
-            spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 8, md: 12 }}>
+            spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, md: 12 }}>
             {
                 posts?.map(post => (
                     <Card key={post.id} sx={{ minWidth: 320, marginTop: "2em", boxShadow: "1px 1px 5px 0px #010101" }} >
                         <CardContent sx={{ padding: "1.5em" }} >
-                            <Grid position="relative" item xs={2} sm={4} md={12} >
+                            <Grid position="relative" item xs={2} md={12} >
                                 <Box sx={{ flexGrow: 1 }} display="flex" justifyContent="space-around" alignItems="center" >
                                     <div>
                                         <Typography sx={{ fontSize: "1.5em", fontWeight: "bold", textTransform: "capitalize" }} variant="h2" component="h2">
