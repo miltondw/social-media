@@ -1,32 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { ApolloProvider } from '@apollo/client'
-import { client } from './apollo/client'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import Navbar from './components/Atom/Navbar';
-import './global.css'
-import Home from './components/Pages/Home';
-import Login from './components/Pages/Login';
-import Register from './components/Pages/Register';
-import { AuthProvider } from './context/auth'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./apollo/client";
+import "./global.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { AuthProvider } from "./context/auth";
+import Routers from "./Routers.routes";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <AuthProvider>
       <ApolloProvider client={client}>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-          </Routes>
-        </Router>
+        <Routers />
       </ApolloProvider>
     </AuthProvider>
   </React.StrictMode>

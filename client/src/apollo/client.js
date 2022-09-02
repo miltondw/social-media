@@ -1,6 +1,18 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
+const httpLink = createHttpLink({
+  uri: "http://localhost:5000/",
+});
+const authLink = setContext(() => {
+  const token = window.sessionStorage.getItem("jwtToken");
+  return {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
 export const client = new ApolloClient({
-    uri: 'http://localhost:5000/',
-    cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
