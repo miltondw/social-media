@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -26,7 +25,7 @@ import { UseHandles } from "./hook";
 const { Search, SearchIconWrapper, StyledInputBase } = styledNav();
 
 export default function Navbar() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = AuthContext();
   const navItems = ["Login", "Register"];
   const navigate = useNavigate();
   const {

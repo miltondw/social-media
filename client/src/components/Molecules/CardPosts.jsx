@@ -1,35 +1,21 @@
 import Moment from "react-moment";
 import {
-  Button,
   Avatar,
   Typography,
   Grid,
   Card,
   CardContent,
   Box,
-  Badge,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { LIKE_POST } from "../../apollo/gql/Mutation";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ForumIcon from "@mui/icons-material/Forum";
+import CardBtns from "./CardBtns";
+import { DELETE_POST } from "../../apollo/gql/Mutation";
+
 export default function CardPosts({ posts }) {
   const urlAvatar =
     "https://www.kindpng.com/picc/m/421-4212623_gd-avatar-alien-circle-hd-png-download.png";
-
-  const [likePost, { error }] = useMutation(LIKE_POST);
-  function handleLike(postId) {
-    likePost({
-      variables: { postId },
-    });
-  }
   return (
-    <Grid
-      container
-      justifyContent="space-around"
-      spacing={{ xs: 2, md: 2 }}
-      columns={{ xs: 1, md: 12 }}>
+    <>
       {posts?.map((post) => (
         <Card
           key={post.id}
@@ -38,7 +24,7 @@ export default function CardPosts({ posts }) {
             marginTop: "2em",
             boxShadow: "1px 1px 5px 0px #010101",
           }}>
-          <CardContent sx={{ padding: "1.5em" }}>
+          <CardContent>
             <Grid position="relative" item xs={2} md={12}>
               <Box
                 sx={{ flexGrow: 1 }}
@@ -77,28 +63,11 @@ export default function CardPosts({ posts }) {
                   {post.body}
                 </Typography>
               </Link>
-              <Box
-                sx={{ position: "absolute", bottom: "-1.8em", right: "0.5em" }}>
-                <Button
-                  size="large"
-                  aria-label={`show ${post.likeCount} new mails`}
-                  onClick={() => handleLike(post.id)}>
-                  <Badge badgeContent={post.likeCount} color="error">
-                    <FavoriteIcon />
-                  </Badge>
-                </Button>
-                <Button
-                  size="large"
-                  aria-label={`show ${post.commentCount} new mails`}>
-                  <Badge badgeContent={post.commentCount} color="error">
-                    <ForumIcon />
-                  </Badge>
-                </Button>
-              </Box>
+              <CardBtns post={post} query={DELETE_POST} />
             </Grid>
           </CardContent>
         </Card>
       ))}
-    </Grid>
+    </>
   );
 }
