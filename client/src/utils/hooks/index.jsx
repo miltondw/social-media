@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useContext } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
@@ -23,10 +22,10 @@ export const UseForm = (callback, initialState = {}) => {
 export const UseSign = (values, GqlMutation, user) => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const context = useContext(AuthContext);
+  const { login } = AuthContext();
   const [sign, { loading }] = useMutation(GqlMutation, {
     update(_, { data }) {
-      context.login(data[user[0]]);
+      login(data[user[0]]);
       navigate(user[1]);
     },
     onError(err) {

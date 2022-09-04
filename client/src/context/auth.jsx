@@ -1,8 +1,10 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import jwtDecode from "jwt-decode";
+
 const initialState = {
   user: null,
 };
+
 if (window.sessionStorage.getItem("jwtToken")) {
   const decodedToken = jwtDecode(window.sessionStorage.getItem("jwtToken"));
   if (decodedToken.exp * 1000 < Date.now()) {
@@ -11,11 +13,15 @@ if (window.sessionStorage.getItem("jwtToken")) {
     initialState.user = decodedToken;
   }
 }
-export const AuthContext = createContext({
+
+const Context = createContext({
   user: null,
   login: (data) => {},
   logout: () => {},
 });
+
+export const AuthContext = () => useContext(Context);
+
 function authReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
@@ -47,9 +53,6 @@ export function AuthProvider(props) {
     dispatch({ type: "LOGOUT" });
   }
   return (
-    <AuthContext.Provider
-      value={{ user: state.user, login, logout }}
-      {...props}
-    />
+    <Context.Provider value={{ user: state.user, login, logout }} {...props} />
   );
 }
