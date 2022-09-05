@@ -7,15 +7,16 @@ const mongoose = require("mongoose");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req })
+  context: ({ req }) => ({ req }),
 });
+const URI = "mongodb://localhost:27017/socialmedia";
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(process.env.MONGODB_URI || URI, {
     useNewUrlParser: true,
   })
   .then(() => {
     console.log("MongoDB Connect");
-    return server.listen({ port: process.env.PORT });
+    return server.listen({ port: process.env.PORT || 5000 });
   })
   .then((res) => console.log(`server running at ${res.url}`));
