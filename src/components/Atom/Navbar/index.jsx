@@ -6,6 +6,7 @@ import {
   IconButton,
   Badge,
   MenuItem,
+  MenuList,
   Menu,
   List,
   ListItem,
@@ -51,21 +52,19 @@ export default function Navbar() {
     color: "#10375c",
   };
   const renderMenu = (
-    <>
-      <List sx={{ display: "flex" }}>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              to={`/${item.toLowerCase()}`}>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </NavLink>
-          </ListItem>
-        ))}
-      </List>
-    </>
+    <List sx={{ display: "flex" }}>
+      {navItems.map((item) => (
+        <ListItem key={item} disablePadding>
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to={`/${item.toLowerCase()}`}>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </NavLink>
+        </ListItem>
+      ))}
+    </List>
   );
   const renderMenuUser = (
     <Menu
@@ -104,7 +103,7 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
       {user ? (
-        <>
+        <MenuList>
           <MenuItem>
             <IconButton
               size="large"
@@ -149,7 +148,7 @@ export default function Navbar() {
             </IconButton>
             <p>Logout</p>
           </MenuItem>
-        </>
+        </MenuList>
       ) : (
         navItems.map((item) => (
           <Link key={item} to={item.toLowerCase()}>

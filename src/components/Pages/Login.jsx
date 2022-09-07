@@ -1,7 +1,7 @@
 import * as React from "react";
 import { UseForm, UseSign } from "../../utils/hooks/index";
 import { LOGIN } from "../../apollo/gql/Mutation";
-import Form from "../Atom/Form";
+import Form from "../Molecules/Form";
 export default function Login() {
   const initialState = {
     username: "",

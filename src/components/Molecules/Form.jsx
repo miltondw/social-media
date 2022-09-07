@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
+import Alerts from "../Atom/Alerts";
 
 export default function Form({
   onSubmit,
@@ -94,7 +95,7 @@ export default function Form({
           <List sx={{ display: "flex", flexDirection: "column" }}>
             {Object.values(errors).map((error) => (
               <ListItem key={error}>
-                <ListItemText sx={{ color: "red" }} primary={error} />
+                <Alerts type="error" message={error} />
               </ListItem>
             ))}
           </List>
