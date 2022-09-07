@@ -5,6 +5,8 @@ import { AuthContext } from "../../context/auth";
 
 export const UseForm = (callback, initialState = {}) => {
   const [values, setValues] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
+
   const onchange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -12,10 +14,15 @@ export const UseForm = (callback, initialState = {}) => {
     e.preventDefault();
     callback();
   };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return {
     onchange,
     onSubmit,
     values,
+    showPassword,
+    handleClickShowPassword,
   };
 };
 

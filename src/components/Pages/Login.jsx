@@ -8,7 +8,8 @@ export default function Login() {
     password: "",
   };
   const user = ["login", "/"];
-  const { onSubmit, onchange, values } = UseForm(loginUser, initialState);
+  const { onSubmit, onchange, values, handleClickShowPassword, showPassword } =
+    UseForm(loginUser, initialState);
   const { errors, loading, sign } = UseSign(values, LOGIN, user);
   function loginUser() {
     sign();
@@ -21,6 +22,8 @@ export default function Login() {
       errors={errors}
       loading={loading}
       path={user[1]}
+      handleClickShowPassword={handleClickShowPassword}
+      showPassword={showPassword}
     />
   );
 }

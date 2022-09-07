@@ -1,8 +1,13 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+const uri =
+  process.env.REACT_APP_NODE_ENV === "production"
+    ? process.env.REACT_APP_SERVER_URI
+    : process.env.REACT_APP_SERVER_URI_LOCAL;
+
 const httpLink = createHttpLink({
-  uri: "https://social-media-server-miltondw-git-backend-miltondw.vercel.app/",
+  uri,
 });
 const authLink = setContext(() => {
   const token = window.sessionStorage.getItem("jwtToken");

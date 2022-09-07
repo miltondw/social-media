@@ -2,14 +2,17 @@ import React from "react";
 import {
   TextField,
   Box,
-  List,
-  ListItem,
-  ListItemText,
   Container,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  OutlinedInput,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import Alerts from "../Atom/Alerts";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function Form({
   onSubmit,
@@ -18,7 +21,11 @@ export default function Form({
   values,
   loading,
   path,
+  handleClickShowPassword,
+  showPassword,
 }) {
+  const errorValues = Object.values(errors);
+
   return (
     <Container>
       <Box
@@ -53,33 +60,60 @@ export default function Form({
             onChange={onchange}
           />
         )}
-        <TextField
-          required
-          id="password"
-          name="password"
-          label={errors?.password ? errors?.password : "Password"}
-          type="password"
-          defaultValue={values.password}
-          autoComplete="current-password"
-          variant="standard"
-          onChange={onchange}
-          error={errors?.password ? true : false}
-        />
-        {path !== "/" && (
-          <TextField
-            required
-            id="confirmPassword"
-            name="confirmPassword"
-            label={errors?.password ? errors?.password : "Confirm Password"}
-            type="password"
-            defaultValue={values.confirmPassword}
-            autoComplete="current-password"
-            variant="standard"
+        <FormControl required sx={{ m: 1, width: "100%" }} variant="outlined">
+          <InputLabel htmlFor="password">
+            {errors?.password ? errors?.password : "Password"}
+          </InputLabel>
+          <OutlinedInput
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={values.password}
             onChange={onchange}
-            error={errors?.password ? true : false}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label={errors?.password ? errors?.password : "Password"}
           />
+        </FormControl>
+        {path !== "/" && (
+          <FormControl required sx={{ m: 1, width: "100%" }} variant="outlined">
+            <InputLabel htmlFor="confirmPassword">
+              {errors?.confirmPassword
+                ? errors?.confirmPassword
+                : "Confirm Password"}
+            </InputLabel>
+            <OutlinedInput
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showPassword ? "text" : "password"}
+              value={values.confirmPassword}
+              onChange={onchange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle confirmPassword visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label={
+                errors?.confirmPassword
+                  ? errors?.confirmPassword
+                  : "Confirm Password"
+              }
+            />
+          </FormControl>
         )}
-
         {
           <LoadingButton
             loading={loading}
@@ -91,15 +125,8 @@ export default function Form({
             {path !== "/" ? "Register" : "Login"}
           </LoadingButton>
         }
-        {errors && (
-          <List sx={{ display: "flex", flexDirection: "column" }}>
-            {Object.values(errors).map((error) => (
-              <ListItem key={error}>
-                <Alerts type="error" message={error} />
-              </ListItem>
-            ))}
-          </List>
-        )}
+
+        {errors && <Alerts type="error" errorValues={errorValues} />}
       </Box>
     </Container>
   );

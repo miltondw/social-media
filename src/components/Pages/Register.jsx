@@ -10,7 +10,8 @@ export default function Register() {
     confirmPassword: "",
   };
   const user = ["register", "/login"];
-  const { onSubmit, onchange, values } = UseForm(registerUser, initialState);
+  const { onSubmit, onchange, values, handleClickShowPassword, showPassword } =
+    UseForm(registerUser, initialState);
   const { errors, loading, sign } = UseSign(values, REGISTER, user);
   function registerUser() {
     sign();
@@ -23,6 +24,8 @@ export default function Register() {
       errors={errors}
       loading={loading}
       path={user[1]}
+      handleClickShowPassword={handleClickShowPassword}
+      showPassword={showPassword}
     />
   );
 }
