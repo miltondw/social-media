@@ -21,6 +21,7 @@ export default function CardPosts({ posts }) {
           key={post.id}
           sx={{
             minWidth: 320,
+            maxWidth: 320,
             marginTop: "2em",
             boxShadow: "1px 1px 5px 0px #010101",
           }}>
