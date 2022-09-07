@@ -1,7 +1,10 @@
 node_modules
 .pnp
 .pnp.js
+#Vercel
 .vercel
+vercel.json
+
 # testing
 coverage
 
