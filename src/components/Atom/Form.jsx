@@ -56,26 +56,26 @@ export default function Form({
           required
           id="password"
           name="password"
-          label={errors.password ? errors.password : "Password"}
+          label={errors?.password ? errors?.password : "Password"}
           type="password"
           defaultValue={values.password}
           autoComplete="current-password"
           variant="standard"
           onChange={onchange}
-          error={errors.password ? true : false}
+          error={errors?.password ? true : false}
         />
         {path !== "/" && (
           <TextField
             required
             id="confirmPassword"
             name="confirmPassword"
-            label={errors.password ? errors.password : "Confirm Password"}
+            label={errors?.password ? errors?.password : "Confirm Password"}
             type="password"
             defaultValue={values.confirmPassword}
             autoComplete="current-password"
             variant="standard"
             onChange={onchange}
-            error={errors.password ? true : false}
+            error={errors?.password ? true : false}
           />
         )}
 
