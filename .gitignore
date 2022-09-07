@@ -1,6 +1,7 @@
 node_modules
 .pnp
 .pnp.js
+
 #Vercel
 .vercel
 vercel.json
@@ -25,4 +26,3 @@ yarn-error.log*
 
 
 TODO.md
-.vercel
