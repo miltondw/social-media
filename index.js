@@ -15,6 +15,7 @@ const server = new ApolloServer({
       : ApolloServerPluginLandingPageGraphQLPlayground(),
   ],
   cache: "bounded",
+  introspection: process.env.NODE_ENV === "production" ? true : false,
 });
 const URI = "mongodb://localhost:27017/socialmedia";
 
