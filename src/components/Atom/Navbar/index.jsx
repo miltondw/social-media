@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import {
   AccountCircle,
-  Mail,
   Notifications,
   MoreVert,
   Home,
@@ -25,6 +24,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AuthContext } from "../../../context/auth";
 import { styledNav } from "./styledNav";
 import { UseHandles } from "./hook";
+
 const { Search, SearchIconWrapper, StyledInputBase } = styledNav();
 
 export default function Navbar() {
@@ -84,7 +84,6 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={Logout}>Logout</MenuItem>
     </Menu>
   );
@@ -106,17 +105,6 @@ export default function Navbar() {
       onClose={handleMobileMenuClose}>
       {user ? (
         <MenuList>
-          <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="show 0 new mails"
-              color="inherit">
-              <Badge badgeContent={0} color="error">
-                <Mail />
-              </Badge>
-            </IconButton>
-            <p>Messages</p>
-          </MenuItem>
           <MenuItem>
             <IconButton
               size="large"
@@ -203,14 +191,6 @@ export default function Navbar() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {user ? (
               <>
-                <IconButton
-                  size="large"
-                  aria-label="show 0 new mails"
-                  color="inherit">
-                  <Badge badgeContent={0} color="error">
-                    <Mail />
-                  </Badge>
-                </IconButton>
                 <IconButton
                   size="large"
                   aria-label="show 0 new notifications"
