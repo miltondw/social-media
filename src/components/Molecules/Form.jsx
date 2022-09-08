@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  TextField,
   Box,
   Container,
   FormControl,
@@ -12,7 +11,13 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import Alerts from "../Atom/Alerts";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  Visibility,
+  VisibilityOff,
+  EmailOutlined,
+  AccountCircle,
+  Password,
+} from "@mui/icons-material";
 
 export default function Form({
   onSubmit,
@@ -35,41 +40,77 @@ export default function Form({
         onSubmit={onSubmit}
         display="flex"
         sx={{ flexDirection: "column", width: "40%", margin: "2em auto" }}>
-        <TextField
-          required
-          id="username"
-          name="username"
-          label={errors?.username ? errors?.username : "Username"}
-          error={errors?.username ? true : false}
-          defaultValue={values.username}
-          autoComplete="current-username"
-          variant="standard"
-          onChange={onchange}
-        />
-        {path !== "/" && (
-          <TextField
-            required
-            id="email"
-            name="email"
-            label={errors?.email ? errors?.email : "Email"}
-            type="email"
-            defaultValue={values.email}
-            error={errors?.email ? true : false || errors?.empty ? true : false}
-            autoComplete="current-email"
-            variant="standard"
+        <FormControl required sx={{ m: 1, width: "100%" }} variant="outlined">
+          <InputLabel htmlFor="username">
+            {errors?.username ? errors?.username : "Username"}
+          </InputLabel>
+          <OutlinedInput
+            error={errors?.username && true}
+            id="username"
+            name="username"
+            type="text"
+            value={values.username}
             onChange={onchange}
+            startAdornment={
+              <InputAdornment position="start">
+                <IconButton
+                  aria-label="current-email"
+                  onClick={handleClickShowPassword}
+                  edge="start">
+                  <AccountCircle />
+                </IconButton>
+              </InputAdornment>
+            }
+            label={errors?.username ? errors?.username : "Username"}
           />
+        </FormControl>
+        {path !== "/" && (
+          <FormControl required sx={{ m: 1, width: "100%" }} variant="outlined">
+            <InputLabel htmlFor="email">
+              {errors?.email ? errors?.email : "Email"}
+            </InputLabel>
+            <OutlinedInput
+              error={errors?.email && true}
+              id="email"
+              name="email"
+              type="email"
+              value={values.email}
+              onChange={onchange}
+              startAdornment={
+                <InputAdornment position="start">
+                  <IconButton
+                    aria-label="current-email"
+                    onClick={handleClickShowPassword}
+                    edge="start">
+                    <EmailOutlined />
+                  </IconButton>
+                </InputAdornment>
+              }
+              label={errors?.email ? errors?.email : "Email"}
+            />
+          </FormControl>
         )}
         <FormControl required sx={{ m: 1, width: "100%" }} variant="outlined">
           <InputLabel htmlFor="password">
             {errors?.password ? errors?.password : "Password"}
           </InputLabel>
           <OutlinedInput
+            error={errors?.password && true}
             id="password"
             name="password"
             type={showPassword ? "text" : "password"}
             value={values.password}
             onChange={onchange}
+            startAdornment={
+              <InputAdornment position="start">
+                <IconButton
+                  aria-label="current-email"
+                  onClick={handleClickShowPassword}
+                  edge="start">
+                  <Password />
+                </IconButton>
+              </InputAdornment>
+            }
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -91,6 +132,7 @@ export default function Form({
                 : "Confirm Password"}
             </InputLabel>
             <OutlinedInput
+              error={errors?.password && true}
               id="confirmPassword"
               name="confirmPassword"
               type={showPassword ? "text" : "password"}

@@ -14,12 +14,14 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import {
+  AccountCircle,
+  Mail,
+  Notifications,
+  MoreVert,
+  Home,
+} from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import HomeIcon from "@mui/icons-material/Home";
 import { AuthContext } from "../../../context/auth";
 import { styledNav } from "./styledNav";
 import { UseHandles } from "./hook";
@@ -110,7 +112,7 @@ export default function Navbar() {
               aria-label="show 0 new mails"
               color="inherit">
               <Badge badgeContent={0} color="error">
-                <MailIcon />
+                <Mail />
               </Badge>
             </IconButton>
             <p>Messages</p>
@@ -121,7 +123,7 @@ export default function Navbar() {
               aria-label="show 0 new notifications"
               color="inherit">
               <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
+                <Notifications />
               </Badge>
             </IconButton>
             <p>Notifications</p>
@@ -171,7 +173,7 @@ export default function Navbar() {
               aria-label="open drawer"
               sx={{ mr: 2 }}>
               {!user ? (
-                <HomeIcon
+                <Home
                   fontSize="large"
                   sx={{ color: location.pathname === "/" ? "#10375c" : "" }}
                 />
@@ -206,7 +208,7 @@ export default function Navbar() {
                   aria-label="show 0 new mails"
                   color="inherit">
                   <Badge badgeContent={0} color="error">
-                    <MailIcon />
+                    <Mail />
                   </Badge>
                 </IconButton>
                 <IconButton
@@ -214,7 +216,7 @@ export default function Navbar() {
                   aria-label="show 0 new notifications"
                   color="inherit">
                   <Badge badgeContent={0} color="error">
-                    <NotificationsIcon />
+                    <Notifications />
                   </Badge>
                 </IconButton>
                 <IconButton
@@ -240,7 +242,7 @@ export default function Navbar() {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit">
-              <MoreIcon />
+              <MoreVert />
             </IconButton>
           </Box>
         </Toolbar>
