@@ -3,7 +3,10 @@ const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers/index");
 const mongoose = require("mongoose");
-const { ApolloServerPluginLandingPageDisabled } = require("apollo-server-core");
+const {
+  ApolloServerPluginLandingPageDisabled,
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require("apollo-server-core");
 // TODO:Subscription new Post
 const server = new ApolloServer({
   typeDefs,
@@ -15,12 +18,14 @@ const server = new ApolloServer({
       : ApolloServerPluginLandingPageGraphQLPlayground(),
   ],
   cache: "bounded",
-  introspection: process.env.NODE_ENV === "production" ? true : false,
+  introspection: true,
 });
-const URI = "mongodb://localhost:27017/socialmedia";
-
+const URI =
+  process.env.NODE_ENV === "production"
+    ? process.env.MONGODB_URI
+    : process.env.MONGODB_URI_LOCAL;
 mongoose
-  .connect(process.env.MONGODB_URI || URI, {
+  .connect(URI, {
     useNewUrlParser: true,
   })
   .then(() => {
