@@ -45,4 +45,26 @@ const GET_POST = gql`
     }
   }
 `;
-export { GET_POSTS, GET_POST };
+const GET_MY_POSTS = gql`
+  query GetMyPosts($username: String!) {
+    getMyPosts(username: $username) {
+      id
+      username
+      createdAt
+      body
+      likes {
+        createdAt
+        id
+        username
+      }
+      comments {
+        body
+        createdAt
+        id
+      }
+      likeCount
+      commentCount
+    }
+  }
+`;
+export { GET_POSTS, GET_POST, GET_MY_POSTS };

@@ -5,14 +5,19 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { useMutation } from "@apollo/client";
 import { CREATE_POST, CREATE_COMMENT } from "../../apollo/gql/Mutation";
-import { GET_POSTS, GET_POST } from "../../apollo/gql/Get";
+import { GET_POSTS, GET_POST, GET_MY_POSTS } from "../../apollo/gql/Get";
 
-export default function PostForm({ comment, postId }) {
+export default function PostForm({ comment, postId, username }) {
   const mutation = comment ? CREATE_COMMENT : CREATE_POST;
   const state = { body: "" };
   if (comment) state.postId = postId;
   const refetchQueries = !comment
-    ? [{ query: GET_POSTS }, "GetPosts"]
+    ? [
+        { query: GET_POSTS },
+        "GetPosts",
+        { query: GET_MY_POSTS, variables: { username } },
+        "GetMyPosts",
+      ]
     : [{ query: GET_POST, variables: { postId } }, "GetPost"];
 
   if (comment) state.postId = postId;
@@ -37,7 +42,12 @@ export default function PostForm({ comment, postId }) {
       autoComplete="off"
       onSubmit={onSubmit}
       display="flex"
-      sx={{ flexDirection: "column", width: "23%", margin: "2em auto" }}>
+      sx={{
+        flexDirection: "column",
+        width: "23%",
+        margin: "2em auto",
+        "@media (max-width: 700px)": { width: "80%" },
+      }}>
       <TextField
         required
         id="body"

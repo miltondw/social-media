@@ -1,16 +1,19 @@
-import { useQuery } from "@apollo/client";
-import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { GET_POSTS } from "../../apollo/gql/Get";
+import { useQuery } from "@apollo/client";
+import { GET_MY_POSTS } from "../../apollo/gql/Get";
 import { AuthContext } from "../../context/auth";
 import CardPosts from "../Molecules/CardPosts";
+import { Container, Grid, Typography } from "@mui/material";
 import PostForm from "../Molecules/PostForm";
-function Home() {
-  const { loading, error, data } = useQuery(GET_POSTS);
+
+export default function Profile() {
   const { user } = AuthContext();
+  const { loading, error, data } = useQuery(GET_MY_POSTS, {
+    variables: { username: user.username },
+  });
   const [posts, setPost] = useState([]);
   useEffect(() => {
-    setPost(data?.getPosts);
+    setPost(data?.getMyPosts);
   }, [data]);
   if (loading) return <div className="Home">Loading...</div>;
   if (error) return <p>Error</p>;
@@ -25,7 +28,7 @@ function Home() {
         }}
         variant="h1"
         component="h2">
-        Recent Posts
+        My Posts
       </Typography>
       {user && <PostForm username={user.username} />}
       <Grid
@@ -39,5 +42,3 @@ function Home() {
     </Container>
   );
 }
-
-export default Home;
